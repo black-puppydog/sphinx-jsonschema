@@ -13,6 +13,7 @@
 from sys import version_info
 from copy import deepcopy
 from pathlib import Path
+from json import dumps
 from docutils import statemachine
 from docutils import nodes
 from docutils.nodes import fully_normalize_name as normalize_name
@@ -526,7 +527,8 @@ class WideFormat(object):
     def _examples(self, examples):
         # Render examples as rows
         rows = []
-        rows.extend(self._render_any_value(examples))
+        # rows.extend(self._render_any_value(examples))
+        rows.extend(self._render_any_value([dumps(o, indent=2) for o in examples]))
         rows = self._prepend(self._cell('examples'), rows)
         return rows
 
